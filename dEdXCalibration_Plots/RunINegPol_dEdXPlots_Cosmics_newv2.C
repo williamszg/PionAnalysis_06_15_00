@@ -24,7 +24,7 @@ TFile *f2 = new TFile("../histoROOTfiles_forPlots/CosmicMC_histos_ScaleAndSmeard
 // ### False = Don't fix the parameters                                 ### 
 // ########################################################################
 
-bool FixTheParameter = false;
+bool FixTheParameter = true;
 
 
 //--------------------------------------------------------------------------------------------------------------
@@ -67,6 +67,7 @@ TF1 *combined_data_dedx   = new TF1("combined_data_dedx","landau+gaus(0)+gaus(3)
 
 
 // 									LANDAU FIT
+// !!!!! This is just used to seed the landau + gaussian fit so that we don't get crazy values !!!!!!!
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ======================================
 // === Getting a seed for the Landau ====
@@ -87,7 +88,10 @@ data_dedx_landaugaus->SetParameters(landauData_parameters);
 // ### Fitting the data dE/dX with Landau+Gaus ###
 data_dedx_landaugaus->SetParLimits(0,0,900000);
 data_dedx_landaugaus->SetParLimits(1,0,900000);
-hDatadEdX->Fit(data_dedx_landaugaus,"R+0i","0", 0.0, 50.0);
+
+// !!! To fit the actual Landau portion of the function !!!
+// !!!            I start the fit at 1 MeV/cm           !!!
+hDatadEdX->Fit(data_dedx_landaugaus,"R+0i","0", 1.0, 50.0);
 
 // ### Get the seed parameters for the Landau+Gaus fit ###
 data_dedx_landau->GetParameters(&fullFitData_parameters[0]); //<---Getting parameters from fit 0,1,2
@@ -100,6 +104,10 @@ data_dedx_landau->GetParameters(&fullFitData_parameters[0]); //<---Getting param
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 data_dedx_gausLOW->SetParLimits(0,0,900000);
 data_dedx_gausLOW->SetParLimits(1,0,2);
+
+// !!! To only sample the "low tail" I fit in the region !!!
+// !!!         of unphysical dE/dX below 1 MeV/cm        !!!
+
 // ### Fitting the data dE/dX with Gaussian as a seed ###
 hDatadEdX->Fit(data_dedx_gausLOW,"R+0iLL","0", 0, 1);
 
@@ -374,6 +382,12 @@ if(FixTheParameter)
    combined_mc_dedx->SetParLimits(3,0,fullFitData_parameters[3]);
    combined_mc_dedx->FixParameter(4,fullFitData_parameters[4]);
    combined_mc_dedx->FixParameter(5,fullFitData_parameters[5]);
+   
+   // === Setting the delta-ray portion ===
+   combined_mc_dedx->SetParLimits(6,0,fullFitData_parameters[6]);
+   combined_mc_dedx->FixParameter(7,fullFitData_parameters[7]);
+   combined_mc_dedx->SetParLimits(8,0,fullFitData_parameters[8]);
+   
    }//<---End Fixing Paramters
 
 else
@@ -381,6 +395,10 @@ else
    combined_mc_dedx->SetParLimits(3,0,900000);
    combined_mc_dedx->SetParLimits(4,0,900000);
    combined_mc_dedx->SetParLimits(5,0,900000);
+   // === Setting the delta-ray portion ===
+   combined_mc_dedx->SetParLimits(6,0,900000);
+   //combined_data_dedx->SetParLimits(7,2,6);
+   combined_mc_dedx->SetParLimits(8,0,900000);
    
    }//<---Not fixing parameters
 
