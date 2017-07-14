@@ -1,4 +1,4 @@
-
+*.root
 ROOTFILES/*.root
 RunINegPolData/*.so
 RunINegPolData/*.d

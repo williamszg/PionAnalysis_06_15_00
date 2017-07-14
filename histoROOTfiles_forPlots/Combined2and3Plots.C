@@ -165,14 +165,14 @@ hdataDeltaWCTrkX2->SetLineWidth(2);
 hdataDeltaWCTrkX3->SetLineColor(kRed);
 hdataDeltaWCTrkX3->SetLineWidth(2);
 
-hdataDeltaWCTrkX3->GetXaxis()->SetTitle("Change in X Between WC and TPC (cm)");
-hdataDeltaWCTrkX3->GetXaxis()->CenterTitle();
+hdataDeltaWCTrkX2->GetXaxis()->SetTitle("Change in X Between WC and TPC (cm)");
+hdataDeltaWCTrkX2->GetXaxis()->CenterTitle();
 
-hdataDeltaWCTrkX3->GetYaxis()->SetTitle("Normalized Events");
-hdataDeltaWCTrkX3->GetYaxis()->CenterTitle();
+hdataDeltaWCTrkX2->GetYaxis()->SetTitle("Normalized Events");
+hdataDeltaWCTrkX2->GetYaxis()->CenterTitle();
 
-hdataDeltaWCTrkX3->Draw("histo");
-hdataDeltaWCTrkX2->Draw("histosame");
+hdataDeltaWCTrkX2->Draw("histo");
+hdataDeltaWCTrkX3->Draw("histosame");
 
 
 // |--- Defining the Legend for the Plot ---|
@@ -210,14 +210,14 @@ hdataDeltaWCTrkY2->SetLineWidth(2);
 hdataDeltaWCTrkY3->SetLineColor(kRed);
 hdataDeltaWCTrkY3->SetLineWidth(2);
 
-hdataDeltaWCTrkY3->GetXaxis()->SetTitle("Change in Y Between WC and TPC (cm)");
-hdataDeltaWCTrkY3->GetXaxis()->CenterTitle();
+hdataDeltaWCTrkY2->GetXaxis()->SetTitle("Change in Y Between WC and TPC (cm)");
+hdataDeltaWCTrkY2->GetXaxis()->CenterTitle();
 
-hdataDeltaWCTrkY3->GetYaxis()->SetTitle("Normalized Events");
-hdataDeltaWCTrkY3->GetYaxis()->CenterTitle();
+hdataDeltaWCTrkY2->GetYaxis()->SetTitle("Normalized Events");
+hdataDeltaWCTrkY2->GetYaxis()->CenterTitle();
 
-hdataDeltaWCTrkY3->Draw("histo");
-hdataDeltaWCTrkY2->Draw("histosame");
+hdataDeltaWCTrkY2->Draw("histo");
+hdataDeltaWCTrkY3->Draw("histosame");
 
 
 // |--- Defining the Legend for the Plot ---|
